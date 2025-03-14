@@ -1,0 +1,6 @@
+[
+    { "symbol": "H", "name": "Hydrogen", "atomicNumber": 1, "category": "Nonmetal", "mass": 1.008 },
+    { "symbol": "He", "name": "Helium", "atomicNumber": 2, "category": "Noble Gas", "mass": 4.0026 },
+    { "symbol": "Li", "name": "Lithium", "atomicNumber": 3, "category": "Alkali Metal", "mass": 6.94 }
+  ]
+  
