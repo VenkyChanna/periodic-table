@@ -20,16 +20,18 @@ body {
   background: var(--bg-primary);
   color: var(--text-primary);
   min-height: 100vh;
+  backdrop-filter: blur(5px);
 }
 
 .app {
   min-height: 100vh;
   padding: 2rem;
-  background: linear-gradient(145deg, #0f172a, #1e293b);
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.85));
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
+  backdrop-filter: blur(5px);
 }
 
 .title {
@@ -38,6 +40,19 @@ body {
   margin-bottom: 2rem;
   text-align: center;
   text-shadow: 0 0 20px rgba(79, 209, 197, 0.3);
+  position: relative;
+  z-index: 2;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: linear-gradient(90deg, transparent, #4fd1c5, transparent);
 }
 
 .periodic-table-container {
@@ -76,7 +91,7 @@ body {
   min-height: 50px;
   padding: 0.6rem;
   border-radius: 6px;
-  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  background: linear-gradient(145deg, rgba(26, 26, 46, 0.9), rgba(22, 33, 62, 0.9));
   border: 1px solid rgba(56, 178, 172, 0.2);
   cursor: pointer;
   transition: all 0.2s ease;
@@ -84,6 +99,21 @@ body {
   flex-direction: column;
   justify-content: space-between;
   overflow: hidden;
+  backdrop-filter: blur(2px);
+}
+
+.element-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 15px 15px;
+  opacity: 0.1;
+  z-index: 0;
+  pointer-events: none;
 }
 
 /* Element Category Colors */
@@ -99,9 +129,31 @@ body {
 .element-card[data-category="actinide"] { border-color: #f687b3; }
 
 .element-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(56, 178, 172, 0.2);
-  z-index: 1;
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), 0 0 15px rgba(79, 209, 197, 0.3);
+  z-index: 10;
+}
+
+.element-card:hover::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 6px;
+  box-shadow: 0 0 20px rgba(79, 209, 197, 0.4);
+  animation: pulse 1.5s infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 0.3;
+  }
+  100% {
+    opacity: 0.6;
+  }
 }
 
 .atomic-number {
@@ -467,7 +519,7 @@ body.modal-open {
   border-radius: 12px;
   padding: 2rem;
   max-width: 90%;
-  width: 800px;
+  width: 600px;
   height: 600px;
   border: 1px solid rgba(56, 178, 172, 0.2);
   box-shadow: 0 0 30px rgba(56, 178, 172, 0.2);

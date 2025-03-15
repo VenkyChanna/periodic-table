@@ -3,6 +3,7 @@ import { periodicTableData } from './data/periodicTableData';
 import ElementCard from './ElementCard';
 import Modal from './Modal';
 import './styles.css';
+import cosmosBackground from './cosmos.jpg';
 
 const App = () => {
   const [selectedElement, setSelectedElement] = useState(null);
@@ -155,7 +156,12 @@ const App = () => {
   ];
 
   return (
-    <div className="app">
+    <div className="app" style={{ 
+      backgroundImage: `linear-gradient(145deg, rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.85)), url(${cosmosBackground})`,
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundAttachment: 'fixed'
+    }}>
       <h1 className="title">Interactive Periodic Table</h1>
       
       <div className="periodic-table-container">
