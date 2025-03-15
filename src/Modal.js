@@ -76,9 +76,8 @@ const Modal = ({ element, onClose }) => {
                   <p>
                     <span>Configuration:</span>
                     <div className="electronic-config">
-                      {element.electronicConfiguration.split(' ').map((part, i) => (
-                        <span key={i} className="config-part">{part}</span>
-                      ))}
+                      <span>Full: {element.fullElectronicConfiguration}</span><br />
+                      <span>Compact: {element.electronicConfiguration}</span>
                     </div>
                   </p>
                 )}
@@ -130,7 +129,7 @@ const Modal = ({ element, onClose }) => {
               </button>
             </div>
             <div className="visualizer-content">
-              <ElectronVisualizer electronConfiguration={element.electronicConfiguration} />
+              <ElectronVisualizer electronConfiguration={element.fullElectronicConfiguration} />
             </div>
           </div>
         </div>
