@@ -105,8 +105,8 @@ body {
 }
 
 .atomic-number {
-  font-size: 0.75rem;
-  color: #a0aec0;
+  font-size: 1rem;
+  color: #dce1e7;
   position: absolute;
   top: 0.25rem;
   left: 0.25rem;
@@ -155,6 +155,26 @@ body {
 
 .actinides-row {
   top: -70px;
+}
+
+.series-label {
+  grid-column: 1;
+  padding: 0.5rem;
+  z-index: 10;
+  background: linear-gradient(145deg, #1a1a2e, #16213e);
+  border-radius: 6px;
+  border: 1px solid rgba(56, 178, 172, 0.2);
+  color: #4fd1c5;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 87.5%;
+  box-shadow: 0 0 10px rgba(79, 209, 197, 0.1);
 }
 
 /* Legend */

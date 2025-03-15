@@ -22,11 +22,11 @@ const App = () => {
   );
 
   const lanthanides = periodicTableData.filter(element => 
-    element.atomicNumber >= 57 && element.atomicNumber <= 71
+    element.atomicNumber >= 58 && element.atomicNumber <= 71
   ).sort((a, b) => a.atomicNumber - b.atomicNumber);
   
   const actinides = periodicTableData.filter(element => 
-    element.atomicNumber >= 89 && element.atomicNumber <= 103
+    element.atomicNumber >= 90 && element.atomicNumber <= 103
   ).sort((a, b) => a.atomicNumber - b.atomicNumber);
 
   // Calculate grid position for each element based on periodic table layout
@@ -178,29 +178,11 @@ const App = () => {
               </div>
             );
           })}
-
-          {/* Lanthanides placeholder */}
-          <div className="element-wrapper lanthanide-placeholder" style={{ gridRow: 6, gridColumn: 3 }}>
-            <div className="element-card" data-category="lanthanide">
-              <span className="atomic-number">57-71</span>
-              <span className="symbol">La-Lu</span>
-              <span className="name">Lanthanides</span>
-            </div>
-          </div>
-
-          {/* Actinides placeholder */}
-          <div className="element-wrapper actinide-placeholder" style={{ gridRow: 7, gridColumn: 3 }}>
-            <div className="element-card" data-category="actinide">
-              <span className="atomic-number">89-103</span>
-              <span className="symbol">Ac-Lr</span>
-              <span className="name">Actinides</span>
-            </div>
-          </div>
         </div>
 
         {/* Lanthanides row */}
         <div className="lanthanides-row">
-          <div className="series-label">Lanthanides</div>
+          <div className="series-label">Lanthanides<br/>(Ce-Lu)</div>
           {lanthanides.map((element, index) => (
             <ElementCard
               key={element.atomicNumber}
@@ -212,7 +194,7 @@ const App = () => {
 
         {/* Actinides row */}
         <div className="actinides-row">
-          <div className="series-label">Actinides</div>
+          <div className="series-label">Actinides<br/>(Th-Lr)</div>
           {actinides.map((element, index) => (
             <ElementCard
               key={element.atomicNumber}
