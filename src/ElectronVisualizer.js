@@ -13,7 +13,7 @@ const ElectronVisualizer = ({ electronConfiguration }) => {
     
     // Set canvas size
     const setCanvasSize = () => {
-      const size = Math.min(300, window.innerWidth * 0.8);
+      const size = Math.min(400, window.innerWidth * 0.9);
       canvas.width = size;
       canvas.height = size;
     };
@@ -123,7 +123,7 @@ const ElectronVisualizer = ({ electronConfiguration }) => {
       Object.keys(electronsByShell).forEach(shellNum => {
         const shell = parseInt(shellNum);
         const shellElectrons = electronsByShell[shell];
-        const orbitRadius = 20 + (shell * 20);
+        const orbitRadius = 25 + (shell * 25);
         
         // Calculate speed inversely proportional to shell number
         // v ∝ 1/n where n is the shell number
@@ -137,7 +137,7 @@ const ElectronVisualizer = ({ electronConfiguration }) => {
           electrons.push({
             x: centerX + orbitRadius * Math.cos(angle),
             y: centerY + orbitRadius * Math.sin(angle),
-            radius: 3,
+            radius: 4,
             shell,
             subshell: electron.subshell,
             color: electron.color,
@@ -160,7 +160,7 @@ const ElectronVisualizer = ({ electronConfiguration }) => {
       const uniqueShells = Object.keys(electronsByShell).map(shell => parseInt(shell));
       
       uniqueShells.forEach(shell => {
-        const orbitRadius = 20 + (shell * 20);
+        const orbitRadius = 25 + (shell * 25);
         
         ctx.beginPath();
         ctx.strokeStyle = 'rgba(79, 209, 197, 0.3)';
