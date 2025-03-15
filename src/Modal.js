@@ -1,31 +1,13 @@
 import ElectronVisualizer from './ElectronVisualizer';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 const Modal = ({ element, onClose }) => {
-  const [showVisualizer, setShowVisualizer] = useState(false);
-
   useEffect(() => {
-    // Lock scroll when modal opens
     document.body.classList.add('modal-open');
-    
-    // Cleanup: Remove scroll lock when modal closes
     return () => {
-      if (!showVisualizer) {  // Only remove if visualizer is not open
-        document.body.classList.remove('modal-open');
-      }
+      document.body.classList.remove('modal-open');
     };
-  }, [showVisualizer]);
-
-  // Handle visualizer toggle
-  const handleVisualizerToggle = (show) => {
-    setShowVisualizer(show);
-  };
-
-  // Handle main modal close
-  const handleClose = () => {
-    document.body.classList.remove('modal-open');
-    onClose();
-  };
+  }, []);
 
   if (!element) return null;
 
@@ -50,94 +32,66 @@ const Modal = ({ element, onClose }) => {
   };
 
   return (
-    <>
-      <div className="modal-overlay" onClick={handleClose}>
-        <div className="modal cosmic-theme" onClick={e => e.stopPropagation()}>
-          <div className="element-header">
-            <span className="atomic-number">#{element.atomicNumber}</span>
-            <h2>{element.name}</h2>
-            <div className="symbol-container">
-              <span className="symbol">{element.symbol}</span>
-              <span className="mass">⚖️ {formatAtomicMass(element.atomicMass)} u</span>
+    <div className="modal-overlay" onClick={onClose}>
+      <div className="modal cosmic-theme" onClick={e => e.stopPropagation()}>
+        <div className="modal-content">
+          <div className="modal-left">
+            <div className="element-header">
+              <span className="atomic-number">#{element.atomicNumber}</span>
+              <h2>{element.name}</h2>
+              <div className="symbol-container">
+                <span className="symbol">{element.symbol}</span>
+                <span className="mass">⚖️ {formatAtomicMass(element.atomicMass)} u</span>
+              </div>
             </div>
-          </div>
 
-          <div className="element-details">
-            {element.electronicConfiguration && (
-              <button 
-                className="visualizer-button"
-                onClick={() => handleVisualizerToggle(true)}
-              >
-                View electrons rotation in atom
-              </button>
-            )}
-            
-            <div className="info-grid">
-              <div className="info-card physical-props">
-                <h4>⚛️ Physical Properties</h4>
-                <p><span>State:</span> {getStateIcon(element.standardState)} {element.standardState || 'Unknown'}</p>
-                <p><span>Density:</span> 🎯 {element.density ? `${element.density} g/cm³` : 'Unknown'}</p>
+            <div className="element-details">
+              <div className="info-grid">
+                <div className="info-card physical-props">
+                  <h4>⚛️ Physical Properties</h4>
+                  <p><span>State:</span> {getStateIcon(element.standardState)} {element.standardState || 'Unknown'}</p>
+                  <p><span>Density:</span> 🎯 {element.density ? `${element.density} g/cm³` : 'Unknown'}</p>
+                </div>
+                
+                <div className="info-card classification">
+                  <h4>📚 Classification</h4>
+                  <p><span>Group:</span> 🔷 {element.groupBlock || 'Unknown'}</p>
+                  <p><span>Discovered:</span> {getYearDisplay(element.yearDiscovered)}</p>
+                </div>
               </div>
               
-              <div className="info-card classification">
-                <h4>📚 Classification</h4>
-                <p><span>Group:</span> 🔷 {element.groupBlock || 'Unknown'}</p>
-                <p><span>Discovered:</span> {getYearDisplay(element.yearDiscovered)}</p>
+              <div className="info-card electronic-props">
+                <h4>⚡ Electronic Properties</h4>
+                {element.electronicConfiguration && (
+                  <div className="electronic-config">
+                    <p>Full Electronic Configuration: {element.fullElectronicConfiguration}</p>
+                    <p>Electronic Configuration: {element.electronicConfiguration}</p>
+                  </div>
+                )}
+                {element.oxidationStates && element.oxidationStates.length > 0 && (
+                  <div className="oxidation-states">
+                    <p>Oxidation States:</p>
+                    <div className="states-container">
+                      {element.oxidationStates.map((state, i) => (
+                        <span key={i} className={`oxidation-state ${state >= 0 ? 'positive' : 'negative'}`}>
+                          {state > 0 ? `+${state}` : state}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                )}
               </div>
             </div>
-            
-            <div className="info-card electronic-props">
-              <h4>⚡ Electronic Properties</h4>
-              {element.electronicConfiguration && (
-                <p>
-
-                  <div className="electronic-config">
-                    <span>Full Electronic Configuration: {element.fullElectronicConfiguration}</span><br />
-                    <span>Electronic Configuration: {element.electronicConfiguration}</span>
-                  </div>
-                </p>
-              )}
-              {element.oxidationStates && element.oxidationStates.length > 0 && (
-                <p>
-                  <span>Oxidation States:</span>
-                  <div className="oxidation-states">
-                    {element.oxidationStates.map((state, i) => (
-                      <span key={i} className={`oxidation-state ${state >= 0 ? 'positive' : 'negative'}`}>
-                        {state > 0 ? `+${state}` : state}
-                      </span>
-                    ))}
-                  </div>
-                </p>
-              )}
-            </div>
           </div>
 
-          <button className="close-button" onClick={handleClose}>
-            Close
-          </button>
+          <div className="modal-right">
+            <h3 className="visualizer-title">Electrons Revolution</h3>
+            <ElectronVisualizer electronConfiguration={element.fullElectronicConfiguration} />
+            <button className="close-button" onClick={onClose}>Close</button>
+          </div>
         </div>
       </div>
-
-      {/* Electron Visualizer Modal */}
-      {showVisualizer && (
-        <div className="visualizer-overlay">
-          <div className="visualizer-container">
-            <div className="visualizer-header">
-              <h3>{element.name} Electron Configuration</h3>
-            </div>
-            <div className="visualizer-content">
-              <ElectronVisualizer electronConfiguration={element.fullElectronicConfiguration} />
-            </div>
-            <div className="full-config-display">
-              <p>Full Electronic Configuration: {element.fullElectronicConfiguration}</p>
-            </div>
-            <button className="close-button visualizer-close" onClick={() => handleVisualizerToggle(false)}>
-              Close
-            </button>
-          </div>
-        </div>
-      )}
-    </>
+    </div>
   );
 };
 

@@ -162,7 +162,10 @@ const App = () => {
       backgroundPosition: 'center',
       backgroundAttachment: 'fixed'
     }}>
-      <h1 className="title">Interactive Periodic Table</h1>
+      <div className="header-fixed">
+        <h1 className="title">Interactive Modern Periodic Table</h1>
+        <p className="instruction">Click elements to see electrons dance! ⚛️✨</p>
+      </div>
       
       <div className="periodic-table-container">
         <div className="periodic-table">
