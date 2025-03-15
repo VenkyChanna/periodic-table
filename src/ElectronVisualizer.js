@@ -153,10 +153,10 @@ const ElectronVisualizer = ({ electronConfiguration }) => {
 
   const getOrbitalColor = (orbital) => {
     switch (orbital) {
-      case 's': return '#FF6B6B';
-      case 'p': return '#4ECDC4';
-      case 'd': return '#45B7D1';
-      case 'f': return '#96CEB4';
+      case 's': return '#fe0303';
+      case 'p': return '#0ffe03';
+      case 'd': return '#0905f9';
+      case 'f': return '#f9f104';
       default: return '#ffffff';
     }
   };
