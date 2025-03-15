@@ -320,6 +320,47 @@ body.modal-open {
   gap: 2rem;
 }
 
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.info-card {
+  background: rgba(26, 32, 44, 0.4);
+  border-radius: 8px;
+  border: 1px solid rgba(56, 178, 172, 0.2);
+  padding: 1rem;
+}
+
+.info-card.electronic-props {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+}
+
+.visualizer-button {
+  background: linear-gradient(145deg, #38b2ac, #319795);
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  width: 100%;
+  margin-bottom: 1rem;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.visualizer-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(56, 178, 172, 0.3);
+}
+
 .property-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -368,21 +409,22 @@ body.modal-open {
   letter-spacing: 0.05em;
 }
 
-.visualizer-button {
-  background: linear-gradient(145deg, #38b2ac, #319795);
-  color: white;
-  border: none;
-  padding: 0.75rem 1.5rem;
+.full-config-display {
+  margin-top: 1rem;
+  padding: 0.75rem;
+  background: rgba(26, 32, 44, 0.4);
   border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  width: 100%;
+  border: 1px solid rgba(56, 178, 172, 0.2);
+  text-align: center;
 }
 
-.visualizer-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(56, 178, 172, 0.3);
+.full-config-display p {
+  font-family: monospace;
+  font-size: 1rem;
+  color: #e2e8f0;
+  margin: 0;
+  line-height: 1.5;
+  letter-spacing: 0.05em;
 }
 
 .visualizer-modal {
@@ -465,14 +507,16 @@ body.modal-open {
 
 .visualizer-header {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin-bottom: 1rem;
+  position: relative;
+  text-align: center;
 }
 
 .visualizer-header h3 {
-  color: #4fd1c5;
   margin: 0;
+  color: #4fd1c5;
   font-size: 1.5rem;
 }
 
@@ -488,6 +532,26 @@ body.modal-open {
   max-width: 100%;
   max-height: 100%;
   object-fit: contain;
+}
+
+.visualizer-close {
+  margin-top: 1rem;
+  background: linear-gradient(145deg, #38b2ac, #319795);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.visualizer-close:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(56, 178, 172, 0.3);
 }
 
 /* Responsive adjustments */

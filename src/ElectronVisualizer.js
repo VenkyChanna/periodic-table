@@ -163,26 +163,26 @@ const ElectronVisualizer = ({ electronConfiguration }) => {
 
   return (
     <div className="electron-visualizer">
-      <div className="electron-content">
-        <canvas ref={canvasRef} />
-      </div>
       <div className="orbital-legend">
         <div className="legend-item">
           <span className="color-dot s"></span>
-          <span>s orbital</span>
+          <span>s</span>
         </div>
         <div className="legend-item">
           <span className="color-dot p"></span>
-          <span>p orbital</span>
+          <span>p</span>
         </div>
         <div className="legend-item">
           <span className="color-dot d"></span>
-          <span>d orbital</span>
+          <span>d</span>
         </div>
         <div className="legend-item">
           <span className="color-dot f"></span>
-          <span>f orbital</span>
+          <span>f</span>
         </div>
+      </div>
+      <div className="electron-content">
+        <canvas ref={canvasRef} />
       </div>
     </div>
   );
